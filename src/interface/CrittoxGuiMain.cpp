@@ -39,7 +39,7 @@ The advanced mode tries to gain more security by adding pseudorandom character t
  number character to add to the encrypted file.\n\
 In simple mode you need only set the file fields (\"File to process path\", \"Processed file path\") and give a key/psw (of lenght >= 5) and then\
  the start button should be enabled. In the advanced one you need also to entry the \"Synod file path\" field and specificate if you want to\
- encrypt or decrypt the file using the radio buttons in down and right labeled whit \Operation\".\n\
+ encrypt or decrypt the file using the radio buttons in down and right labeled whit \"Operation\".\n\
 Hope you enjoy this!"
 
 using namespace std;
