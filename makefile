@@ -10,9 +10,9 @@ OBJD=obj/
 
 all:CrittoxGui
 
-
 CrittoxGui:$(OBJS)
 	g++ -o CrittoxGui $(addprefix $(OBJD),$(OBJS)) $(CXXFLAGS) `wx-config --libs`
+	chmod u+x CrittoxGui 
 
 CrittoxGuiApp.o: CrittoxGuiApp.cpp CrittoxGuiApp.h
 	g++ -c `wx-config --cxxflags` -o $(OBJD)$@ $<
@@ -24,6 +24,7 @@ Error.o: Error.cpp Error.h
 	g++ -c `wx-config --cxxflags` -o $(OBJD)$@ $<
 
 %.o:%.cpp
+	test -d $(OBJD) || mkdir $(OBJD)
 	g++ -c -o $(OBJD)$@ $< $(CXXFLAGS)
 
 clean:
