@@ -112,7 +112,7 @@ class Crittox_guiFrame: public wxFrame
                                                     flagSynFileEnc, flagFirstSynDec, flagFirstPsw;
         unsigned int blockValue, contFile;
         //string per i parametri
-        std::string psw, file, endFile, synFile, helpMsg;
+        std::string psw, file, endFile, synFile;
 
         DECLARE_EVENT_TABLE()
 };

@@ -4,7 +4,7 @@
  * Author:    Aiello Vittorio (vittorio.aiello98@gmail.com)
  * Created:   2016-06-19
  * Copyright: Aiello Vittorio ()
- * License: GNU GPLv3
+ * License:
  **************************************************************/
 
 //Lunghezza minima password
@@ -18,13 +18,31 @@
 #include <wx/intl.h>
 #include <wx/font.h>
 #include <wx/msgdlg.h>
+#include <wx/icon.h>
 
 #include "Error.h"
 #include "../func/funcs.h"
 #include "interface.h"
 
-using namespace std;
+#define HELP_MSG "This is an app that aims to crypt and decrypt text files. It can handle only ascii printable character (from '032' to '126').\nYou have to\
+ insert the file you wanto to encrypt in the \"File to process path\" and where you want to save the encrypted text in \"Processed file path\". At\
+ the right and center it has a radio button labeled whith \"Way round\" you have to chose one of them to crypt and the other to decrypt the same\
+ file. When done the start button should be enabled, click on it to perform the task.\n\
+It has two main modes to operate on files.\n\
+The simple mode perforsm only a shift in the alphabet order using the key/psw you immitted in the \"Password\" field or you wrote in the first\
+ line of a \"*.txt\" file. The file can be used switching on the \"by file\" radio button above the \"Password\" text.\n\
+The advanced mode tries to gain more security by adding pseudorandom character to the text files in order to compromise a statistical analysis\
+ of the files. It saves the position of the pseudorandom character in a file \"*.syn\". While decrypting a file that has been encrypted using\
+ the advanced mode you have to select the previus generated \"*.syn\" file (you can share it via unsicure channel because it is encrypted by\
+ binary XOR with the hash (sha512) of the key/psw) in the \"Synod file path\" field that is enabled by clicking on the \"Advanced\" switch. The\
+ \"Block size:\" parameter told the aproximatively lenght of the encrypted file in advanced mode and give information to the app about the\
+ number character to add to the encrypted file.\n\
+In simple mode you need only set the file fields (\"File to process path\", \"Processed file path\") and give a key/psw (of lenght >= 5) and then\
+ the start button should be enabled. In the advanced one you need also to entry the \"Synod file path\" field and specificate if you want to\
+ encrypt or decrypt the file using the radio buttons in down and right labeled whit \Operation\".\n\
+Hope you enjoy this!"
 
+using namespace std;
 
 //helper functions
 enum wxbuildinfoformat {
@@ -202,7 +220,6 @@ Crittox_guiFrame::Crittox_guiFrame(wxWindow* parent,wxWindowID id)
     flagFirstPsw=true;
     blockValue=3072;
     ButtonStart->Disable();
-    helpMsg="Help message";
 }
 
 ///Praticamente fa tutto lui
@@ -467,7 +484,7 @@ void Crittox_guiFrame::OnFilePswdFileChanged(wxFileDirPickerEvent& event)
 ///Mostra messaggio di aiuto
 void Crittox_guiFrame::OnButtonHelpClick(wxCommandEvent& event)
 {
-    wxMessageBox(helpMsg);
+    wxMessageBox(HELP_MSG, "Help message");
 }
 
 ///lancia errori
@@ -491,6 +508,6 @@ void Crittox_guiFrame::OnQuit(wxCommandEvent& event)
 
 void Crittox_guiFrame::OnAbout(wxCommandEvent& event)
 {
-    wxString msg = wxbuildinfo(long_f);
+    wxString msg = "CrittoxGui a GUI to crypt and decrypt text files.\nTo gain more info click on \"Help\" button";
     wxMessageBox(msg, _("Welcome to..."));
 }
